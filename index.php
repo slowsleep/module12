@@ -94,18 +94,18 @@ function getGenderFromName($fullname)
 function getGenderDescription($array)
 {
     $womans = array_filter($array, function($item) {
-        return getGenderFromName($item['fullname']) == "женский";
+        return getGenderFromName($item["fullname"]) == "женский";
     });
     $mans = array_filter($array, function($item) {
-        return getGenderFromName($item['fullname']) == "мужской";
+        return getGenderFromName($item["fullname"]) == "мужской";
     });
     $unknown = array_filter($array, function($item) {
-        return getGenderFromName($item['fullname']) == "неопределённый";
+        return getGenderFromName($item["fullname"]) == "неопределённый";
     });
 
-    $manscount = number_format((100 * count($mans)) / count($array), 2, '.', '');
-    $womanscount = number_format((100 * count($womans)) / count($array), 2, '.', '');
-    $unknownscount = number_format((100 * count($unknown)) / count($array), 2, '.', '');
+    $manscount = number_format((100 * count($mans)) / count($array), 2, ".", "");
+    $womanscount = number_format((100 * count($womans)) / count($array), 2, ".", "");
+    $unknownscount = number_format((100 * count($unknown)) / count($array), 2, ".", "");
 
     $res = <<<TEXT
     Гендерный состав аудитории:
@@ -128,13 +128,13 @@ function getPerfectPartner($surname, $name, $patronomyc, $personos_array)
     ];
     $fullname = getFullnameFromParts($surname, $name, $patronomyc);
     $gender = getGenderFromName($fullname);
-    $rand_person = $personos_array[rand(0, count($personos_array) - 1)]['fullname'];
+    $rand_person = $personos_array[rand(0, count($personos_array) - 1)]["fullname"];
     $gender_rand_person = getGenderFromName($rand_person);
-    $res = '';
+    $res = "";
 
     while ($gender == $gender_rand_person)
     {
-        $rand_person = $personos_array[rand(0, count($personos_array) - 1)]['fullname'];
+        $rand_person = $personos_array[rand(0, count($personos_array) - 1)]["fullname"];
         $gender_rand_person = getGenderFromName($rand_person);
     }
 
