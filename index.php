@@ -103,9 +103,9 @@ function getGenderDescription($array)
         return getGenderFromName($item["fullname"]) == "неопределённый";
     });
 
-    $manscount = number_format((100 * count($mans)) / count($array), 2, ".", "");
-    $womanscount = number_format((100 * count($womans)) / count($array), 2, ".", "");
-    $unknownscount = number_format((100 * count($unknown)) / count($array), 2, ".", "");
+    $manscount = round((100 * count($mans)) / count($array), 1);
+    $womanscount = round((100 * count($womans)) / count($array), 1);
+    $unknownscount = round((100 * count($unknown)) / count($array), 1);
 
     $res = <<<TEXT
     Гендерный состав аудитории:
