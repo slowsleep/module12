@@ -1,4 +1,5 @@
 <?php
+
 $example_persons_array = [
     [
         'fullname' => 'Иванов Иван Иванович',
@@ -64,8 +65,8 @@ function getShortName($fullname)
 {
     $person = getPartsFromFullname($fullname);
     $name = $person["name"];
-    $shortsurname = mb_substr($person["surname"], 0, 1);
-    return "$name $shortsurname. ";
+    $shortSurname = mb_substr($person["surname"], 0, 1);
+    return "$name $shortSurname. ";
 }
 
 
@@ -76,10 +77,13 @@ function getGenderFromName($fullname)
     $gender = 0;
 
     $gender = (
-        str_ends_with($person["surname"], "в") ||
-        (str_ends_with($person["name"], "й") || str_ends_with($person["name"], "н")) ||
-        str_ends_with($person["patronomyc"], "ич")) <=> (str_ends_with($person["surname"], "ва") ||
-        str_ends_with($person["name"], "a") || str_ends_with($person["patronomyc"], "вна")
+        str_ends_with($person["surname"], "в")
+        || (str_ends_with($person["name"], "й")
+        || str_ends_with($person["name"], "н"))
+        || str_ends_with($person["patronomyc"], "ич"))
+        <=> (str_ends_with($person["surname"], "ва")
+        || str_ends_with($person["name"], "a")
+        || str_ends_with($person["patronomyc"], "вна")
     );
 
     return ($gender > 0) ? "мужской" : (($gender < 0) ? "женский" : "неопределённый");
@@ -133,14 +137,15 @@ function getPerfectPartner($surname, $name, $patronomyc, $personos_array)
         $rand_person = $personos_array[rand(0, count($personos_array) - 1)]['fullname'];
         $gender_rand_person = getGenderFromName($rand_person);
     }
+
     $short_person = getShortName($fullname);
     $short_rand_person = getShortName($rand_person);
     $rand_persent = rand(10000, 0) / 100;
 
-    $res = <<<MYTEXT
+    $res = <<<TEXT
     $short_person + $short_rand_person =
     ♡ Идеально на $rand_persent% ♡
-    MYTEXT;
+    TEXT;
 
     return $res;
 }
