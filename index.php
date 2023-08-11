@@ -138,6 +138,10 @@ function getPerfectPartner($surname, $name, $patronomyc, $personos_array)
         $gender_rand_person = getGenderFromName($rand_person);
     }
 
+    if ($gender == "неопределённый" || $gender_rand_person == "неопределённый") {
+        return "Не удалось подобрать идеальную пару";
+    }
+
     $short_person = getShortName($fullname);
     $short_rand_person = getShortName($rand_person);
     $rand_persent = rand(10000, 0) / 100;
